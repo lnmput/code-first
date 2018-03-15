@@ -41,15 +41,37 @@ class User extends Authenticatable
         return mb_substr($this->name, 0,1);
     }
 
+    /**
+     * 用户发布的微册
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function books()
     {
         return $this->hasMany('App\Book', 'uid');
     }
 
+    /**
+     * 用户发布的文章
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function chapters()
     {
         return $this->hasMany('App\Chapter', 'uid');
     }
+
+    public function like_books()
+    {
+        return $this->hasMany('App\Like', 'uid')->where('commentable_type', 'App\Book');
+    }
+
+    public function like_chapters()
+    {
+        return $this->hasMany('App\Like', 'uid')->where('commentable_type', 'App\Chapter');
+    }
+
+
 
     public function ifHaveThisBook()
     {

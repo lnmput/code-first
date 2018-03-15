@@ -36,11 +36,6 @@
                             <li class="{{ set_active('book') }}"><a href="{{ route('book.index') }}">微册</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <form class="navbar-form navbar-left">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                            </form>
                             @guest
                                 <li><a href="{{ route('login') }}">登录</a></li>
                                 <li><a href="{{ route('register') }}">注册</a></li>

@@ -24,7 +24,6 @@ class Tag extends Model
         return static::query()->pluck('name', 'id');
     }
 
-
     public function books()
     {
         return $this->belongsToMany('App\Tag');

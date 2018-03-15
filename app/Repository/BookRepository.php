@@ -113,11 +113,21 @@ class BookRepository
     }
 
 
+    /**
+     *
+     * @param $uid
+     * @param $id
+     */
     public function likeOrUnlike($uid, $id)
     {
 
+        $like = $this->like->where(['uid' => $uid, 'commentable_id' => $id, 'commentable_type' => get_class($this->book)])->first();
 
-        $this->book->where('id', $id)->first()->likes()->create(['uid' => $uid]);
+        if ($like) {
+            $like->delete();
+        } else {
+            $this->book->where('id', $id)->first()->likes()->create(['uid' => $uid]);
+        }
     }
 
 }

@@ -15,13 +15,20 @@ class Comment extends Model
 
 
     /**
-     * 获得拥有此评论的模型。
+     * 获得拥有此评论的模型
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function commentable()
     {
         return $this->morphTo();
     }
 
+    /**
+     * 关联用户
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo('App\User', 'uid');

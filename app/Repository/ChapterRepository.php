@@ -89,12 +89,20 @@ class ChapterRepository
         return config('microbook.sellType');
     }
 
+    /**
+     * 保存评论
+     *
+     * @param $id
+     * @param array $data
+     */
     public function saveComment($id, array $data)
     {
         $this->chapter->where('id', $id)->first()->comments()->create($data);
     }
 
     /**
+     * 点赞或者取消点赞
+     *
      * @param $uid
      * @param $id
      * @throws \Exception

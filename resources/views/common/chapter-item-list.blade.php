@@ -20,4 +20,6 @@
         </div>
     </div>
 </div>
-<hr>
+@if(!$loop->last)
+    <hr>
+@endif

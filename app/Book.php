@@ -58,12 +58,21 @@ class Book extends Model
     }
 
 
-
+    /**
+     * 关联评论数据
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable')->orderByDesc('id');
     }
 
+    /**
+     * 关联点赞的数据
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function likes()
     {
         return $this->morphMany('App\Like', 'commentable')->orderByDesc('id');

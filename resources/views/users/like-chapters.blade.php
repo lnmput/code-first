@@ -5,16 +5,25 @@
     <div class="container">
         <div class="row">
             @include('common.user-index-left')
-            <div class="col-md-9 setting-content">
+            <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Ta喜欢的文章</div>
-                    <div class="panel-body ">
+                    <div class="panel-heading">
+                        <h4>Ta喜欢的文章</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    @if($user->like_chapters->count())
+                        @foreach($user->like_chapters as $item)
+                            @php $item = $item->chapter;  @endphp
+                            @include('common.chapter-item-list')
+                        @endforeach
+                    @else
                         <div class="row not-have-box">
                             <div class="col-md-12">
-                                <h4>您还没有订阅过专栏，<a href="" class="text-primary"> 点此</a>去订阅</h4>
+                                <h4>您还没有喜欢的文章，<a href="" class="text-primary"> 点此</a>去查看</h4>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>

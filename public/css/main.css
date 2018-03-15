@@ -293,7 +293,7 @@ chapter list
 
 
 .chapter-list .help-block {
-    margin-bottom: 0 !important;
+    margin-bottom: -3px !important;
 }
 
 hr {

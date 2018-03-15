@@ -13,7 +13,8 @@ function test()
  * @param $route
  * @return string
  */
-function set_active( $route ) {
+function set_active($route) {
+
 
     if( is_array( $route ) ){
         return in_array(Request::path(), $route) ? 'active' : '';

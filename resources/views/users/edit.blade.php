@@ -13,7 +13,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">个人资料修改</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="post" action="{{ route('users.update') }}">
+                        <form class="form-horizontal" method="post" action="{{ route('user.update') }}">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">用户名</label>
@@ -103,8 +103,7 @@
             data.jid = $('#jid').val();
             data._token = "{{ csrf_token() }}";
             $.ajax({
-                url: "{{ route('users.avatar.upload') }}",
-
+                url: "{{ route('user.avatar.upload') }}",
                 data: data,
                 type: "POST",
                 dataType: 'json',
