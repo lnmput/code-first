@@ -54,7 +54,26 @@ class ChapterRepository
      */
     public function with(array $relations)
     {
-        $this->chapter->with($relations);
+        $this->chapter = $this->chapter->with($relations);
+        return $this;
+    }
+
+    public function withCount(array $relation)
+    {
+        $this->chapter = $this->chapter->withCount($relation);
+        return $this;
+    }
+
+    public function orderByDesc($field)
+    {
+        $this->chapter = $this->chapter->orderByDesc($field);
+        return $this;
+    }
+
+
+    public function order($field, $sort = 'desc')
+    {
+        $this->chapter = $this->chapter->orderBy($field, $sort);
         return $this;
     }
 

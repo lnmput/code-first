@@ -5,7 +5,7 @@
     <script type="text/javascript">
         //做个下简易的验证  大小 格式
         $('#avatarInput').on('change', function(e) {
-            var filemaxsize = 1024 * 5;//5M
+            var filemaxsize = 1024 * 5; //5M
             var target = $(e.target);
             var Size = target[0].files[0].size / 1024;
             if(Size > filemaxsize) {
@@ -48,12 +48,13 @@
             data._token = "{{ csrf_token() }}";
             $.ajax({
                 url: "{{ route('user.avatar.upload') }}",
-
                 data: data,
                 type: "POST",
                 dataType: 'json',
                 success: function(re) {
-                    windows.localtion.reload();
+                    var src = window.location.origin + "/" + re.message;
+                    $(".user-avatar").attr('src', src);
+                    $(".avatar").attr('src', src);
                 }
             });
         }

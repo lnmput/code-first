@@ -27,11 +27,30 @@
                     </div>
                 </div>
 
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="user-info row">
+                            <div class="col-md-4">
+                                <span>0</span>
+                                <a>文章数</a>
+                            </div>
+                            <div class="col-md-4">
+                                <span>0</span>
+                                <a>订阅数</a>
+                            </div>
+                            <div class="col-md-4">
+                                <span>0</span>
+                                <a>喜欢数</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 @if(!empty($currentUser) && $currentUser->id == $item->user->id)
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <a href="{{ route('chapter.edit', $item->id) }}" >
-                                <li class="list-group-item"><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp 持续改进</li>
+                                <li class="list-group-item"><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp 继续编辑</li>
                             </a>
                         </div>
                     </div>
@@ -40,15 +59,18 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <a href="{{ route('book.show', $item->book->id) }}" >
-                            <li class="list-group-item"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp 系列文章</li>
+                            <li class="list-group-item"><i class="fa fa-book" aria-hidden="true"></i>  &nbsp 全部文章</li>
                         </a>
                         <hr>
+
+                        @if(selltype_code($item->sell_type) == 'alone')
+                            <a href="" >
+                                <li class="list-group-item list-group-item-success"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp 单独购买 ({{ $item->price() }})</li>
+                            </a>
+                            <hr>
+                        @endif
                         <a href="{{ route('book.show', $item->book->id) }}" >
-                            <li class="list-group-item list-group-item-success"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp 订阅微册</li>
-                        </a>
-                        <hr>
-                        <a href="{{ route('book.show', $item->book->id) }}" >
-                            <li class="list-group-item list-group-item-danger"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp 单独购买</li>
+                            <li class="list-group-item list-group-item-success"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp 订阅微册 ({{ $item->book->price() }})</li>
                         </a>
                     </div>
                 </div>
@@ -64,15 +86,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
                         <h4>{{ $item->title }}</h4>
-                        <div class="help-block text-center book-extention-info">
-                            <i class="fa fa-clock-o"></i> <abbr>2天前</abbr>
-                            ⋅
-                            <i class="fa fa-eye"></i> 337
-                            ⋅
-                            <i class="fa fa-thumbs-o-up"></i> 18
-                            ⋅
-                            <i class="fa fa-comments-o"></i> 15
-                        </div>
                     </div>
                     <div class="panel-body">
                         {!! $item->content() !!}

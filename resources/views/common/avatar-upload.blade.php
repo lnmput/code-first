@@ -1,10 +1,10 @@
 @if($user->avatar)
     <div class="user-avatar-box">
-        <img title="修改头像" class="user-avatar thumbnail" data-toggle="modal" data-target="#avatar-modal" src="{{ asset($user->avatar()) }}">
+        <img class="user-avatar thumbnail" @auth data-toggle="modal" data-target="#avatar-modal" title="修改头像"  @endauth src="{{ asset($user->avatar()) }}">
     </div>
 @else
     <span class="duke-pulse patch-hint"></span>
-    <div title="修改头像" class="user-avatar-box text-info"  data-toggle="modal" data-target="#avatar-modal">
+    <div class="user-avatar-box text-info" @auth  data-toggle="modal" data-target="#avatar-modal" title="修改头像"  @endauth>
         <p class="thumbnail user-avatar">{{ $user->getFirstWordsFromName() }}</p>
     </div>
 @endif

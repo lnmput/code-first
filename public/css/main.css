@@ -11,6 +11,12 @@ a {
   text-decoration: none !important;
 }
 
+.list-group-item-success {
+    background-color: #5CB85C !important;
+    color: #FFF !important;
+}
+
+
 
 
 .panel-heading {

@@ -39,21 +39,42 @@ class BookRepository
 
     public function with(array $relation)
     {
-         $this->book->with($relation);
-         return $this;
+        $this->book = $this->book->with($relation);
+        return $this;
+    }
+
+    public function withCount(array $relation)
+    {
+        $this->book = $this->book->withCount($relation);
+        return $this;
     }
 
     public function orderByDesc($field)
     {
-        $this->book->orderByDesc($field);
+        $this->book = $this->book->orderByDesc($field);
         return $this;
     }
+
+
+    public function order($field, $sort = 'desc')
+    {
+        $this->book = $this->book->orderBy($field, $sort);
+        return $this;
+    }
+
+    public function hasChapters()
+    {
+        $this->book = $this->book->has('chapters');
+        return $this;
+    }
+
 
     public function all($page = 0)
     {
         if ($page) {
             return $this->book->paginate($page);
         }
+
         return $this->book->get();
     }
 

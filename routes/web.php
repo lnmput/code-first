@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'Chapters@index')->name('home');
+Route::get('/', 'Chapters@index')->name('index');
 
 Route::group(['middleware' => 'web'], function () {
 

@@ -40,3 +40,24 @@ function ajax_success()
         'message' => 'success'
     ]);
 }
+
+function trace_sql($dump = false)
+{
+    DB::listen(function ($event) use($dump) {
+        if ($dump) {
+            dump($event->sql);
+            dump($event->bindings);
+        }
+        Log::info($event->sql);
+        Log::info($event->bindings);
+    });
+}
+
+function selltype_code($id)
+{
+    $sellTypes = config('microbook.sellType');
+
+    return $sellTypes[$id-1]['code'];
+
+
+}

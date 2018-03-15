@@ -62,7 +62,7 @@ class UserRepository
     public function rules($id)
     {
         return [
-            'name' => ['required', 'max:10', Rule::unique('users')->ignore($id)],
+            'name' => ['required', 'max:6', Rule::unique('users')->ignore($id)],
             'profile' => 'max:30'
         ];
     }

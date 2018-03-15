@@ -13,8 +13,9 @@
                 @endforeach
             </div>
             <div class="help-block">
-                <span>文章数：{{ $book->chapters->count() }}</span>
-                <span>订阅数：{{ $book->chapters->count() }}</span>
+                <span>文章数：{{ $book->chapters_count }}</span>
+                <span>订阅数：0</span>
+                <span>喜欢数：{{ $book->likes_count }}</span>
             </div>
             <div class="help-block">
                 <span>更新时间：{{ $book->updated_at }}</span>

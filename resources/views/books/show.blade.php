@@ -25,6 +25,34 @@
                         <p class="help-block">{{ $item->user->profile }}</p>
                     </div>
                 </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="user-info row">
+                            <div class="col-md-4">
+                                <span>{{ $item->chapters_count }}</span>
+                                <a>文章数</a>
+                            </div>
+                            <div class="col-md-4">
+                                <span>0</span>
+                                <a>订阅数</a>
+                            </div>
+                            <div class="col-md-4">
+                                <span>{{ $item->likes_count }}</span>
+                                <a>喜欢数</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="">
+                            <li class="list-group-item list-group-item-success"><i class="fa fa-shopping-cart" aria-hidden="true"></i></i> &nbsp 立即订阅 @if($item->price) {{ $item->price() }} @endif</li>
+                        </a>
+                    </div>
+                </div>
+
                 @if(!empty($currentUser) && $currentUser->id == $item->user->id)
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -33,20 +61,14 @@
                             </a>
                             <hr>
                             <a href="{{ route('chapter.create', $item->id) }}" >
-                                <li class="list-group-item"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; 添加文章（{{ $item->chapters->count() }}）</li>
+                                <li class="list-group-item"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; 新增文章</li>
                             </a>
                         </div>
                     </div>
                 @endif
+
                 <div class="panel panel-default">
-                    <div class="panel-body">
-                        <a href="">
-                            <li class="list-group-item list-group-item-success"><i class="text-md fa fa-list-ul"></i> &nbsp订阅微册 @if($item->price) {{ $item->price() }} @endif</li>
-                        </a>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center">其他文章</div>
+                    <div class="panel-heading text-center">其他</div>
                     <div class="panel-body">
                     </div>
                 </div>
@@ -56,15 +78,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
                         <h4>{{ $item->title }}</h4>
-                        <div class="help-block text-center book-extention-info">
-                            <i class="fa fa-clock-o"></i> <abbr>2天前</abbr>
-                            ⋅
-                            <i class="fa fa-eye"></i> 337
-                            ⋅
-                            <i class="fa fa-thumbs-o-up"></i> 18
-                            ⋅
-                            <i class="fa fa-comments-o"></i> 15
-                        </div>
                     </div>
                     <div class="panel-body">
                         <h2 class="show-h2">全部章节</h2>
@@ -75,7 +88,7 @@
                                     <a href="{{ route('chapter.show', $chapter->id) }}">{{ $chapter->title }}</a>
                                     <small>
                                     <span class="pull-right">
-                                    <span>评论数：12</span>
+                                    <span>喜欢数：{{ $chapter->likes->count() }}</span>
                                 </span>
                                     </small>
                                 </li>
@@ -87,7 +100,6 @@
                 </div>
 
                 @include('common.like', ['url' => route('book.like.submit')])
-
                 @include('common.comment-list')
                 @include('common.comment-textarea', ['url' => route('book.comment.submit')])
             </div>

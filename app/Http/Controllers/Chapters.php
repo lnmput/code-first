@@ -40,7 +40,7 @@ class Chapters extends Controller
 
     public function index()
     {
-        $items = $this->chapterRepository->all(20);
+        $items = $this->chapterRepository->orderByDesc('id')->all(20);
 
         $tags = Tag::getForSelect();
 
@@ -132,6 +132,10 @@ class Chapters extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function likeOrUnlike()
     {
         $id = $this->request->id;

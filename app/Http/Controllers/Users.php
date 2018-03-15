@@ -19,12 +19,14 @@ class Users extends Controller
 
     public function __construct(UserRepository $userRepository)
     {
+
+
         $this->middleware(function ($request, $next) {
 
             $this->user= Auth::user();
             return $next($request);
 
-        });
+        })->except(['index']);
 
         $this->request = request();
         $this->userRepository = $userRepository;
@@ -37,7 +39,6 @@ class Users extends Controller
      */
     public function index($id)
     {
-
 
         $user = $this->userRepository->find($id);
 
@@ -72,7 +73,7 @@ class Users extends Controller
 
         $this->user->save();
 
-        return response()->json(['status' => 200, 'message' => 'ok']);
+        return response()->json(['status' => 200, 'message' => $this->user->avatar()]);
 
     }
 

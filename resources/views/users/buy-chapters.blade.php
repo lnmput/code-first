@@ -11,7 +11,7 @@
                     <div class="panel-body ">
                         <div class="row not-have-box">
                             <div class="col-md-12">
-                                <h4>您还没有订阅过专栏，<a href="" class="text-primary"> 点此</a>去订阅</h4>
+                                <h4>您还没有购买过文章，<a href="{{ route('chapter.index') }}}" class="text-primary"> 点此</a>去购买</h4>
                             </div>
                         </div>
                     </div>

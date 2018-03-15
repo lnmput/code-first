@@ -32,6 +32,11 @@ class Chapter extends Model
         return $parsedown->text($this->content);
     }
 
+    public function price()
+    {
+        return '¥'. $this->price;
+    }
+
 
     public function comments()
     {

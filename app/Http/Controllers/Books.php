@@ -42,7 +42,7 @@ class Books extends Controller
     {
         $tags = Tag::getForSelect();
 
-        $books = $this->bookRepository->orderByDesc('id')->all(10);
+        $books = $this->bookRepository->hasChapters()->with(['tags'])->withCount(['chapters', 'likes'])->orderByDesc('id')->all(20);
 
         return view('books.index',  ['books' => $books, 'tags' => $tags]);
     }
@@ -56,7 +56,8 @@ class Books extends Controller
      */
     public function show($id)
     {
-        $book = $this->bookRepository->with(['user'])->find($id);
+        $book = $this->bookRepository->with(['user', 'chapters'])->withCount(['chapters', 'likes'])->find($id);
+
         $tags = Tag::getForSelect();
 
         return view('books.show', ['item' => $book, 'tags' => $tags]);
