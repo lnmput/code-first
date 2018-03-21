@@ -282,11 +282,25 @@ chapter list
 
 .chapter-list-user-avatar {
     width: 70px;
+    height: 70px;
     margin-right: 5px;
     text-align: center;
     line-height: 70px;
     font-size: 40px;
 }
+
+.book-list-user-avatar {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    text-align: center;
+    line-height: 22px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
 
 .chapter-list-title {
     margin-top: 0 !important;
@@ -448,3 +462,13 @@ a > li {
 .like-avatar-list .thumbnail {
     margin-bottom: 0 !important;
 }
+
+
+
+
+
+
+
+
+
+

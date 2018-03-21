@@ -26,11 +26,11 @@
         <div class="panel-body">
             <div class="user-info row">
                 <div class="col-md-4">
-                    <span>{{ $user->books->count() }}</span>
+                    <span>{{ $user->books_count }}</span>
                     <a>微册</a>
                 </div>
                 <div class="col-md-4">
-                    <span>{{ $user->chapters->count() }}</span>
+                    <span>{{ $user->chapters_count }}</span>
                     <a>文章</a>
                 </div>
                 <div class="col-md-4">

@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        //Carbon::setLocale('zh');
+        Carbon::setLocale('zh');
 
         \View::composer('*', function (View $view) {
             $view->with("currentUser", \Auth::user());

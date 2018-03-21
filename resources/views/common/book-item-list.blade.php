@@ -1,6 +1,15 @@
 <div class="panel panel-default book-list">
     <div class="panel-heading">
-        <h4><a href="{{ route('book.show', $book->id) }}">{{ $book->title }}</a></h4>
+        @if($book->user->avatar)
+            <div  style="display: inline-block;">
+                <img class="book-list-user-avatar" title="{{ $book->user->name }}" src="{{ asset($book->user->avatar()) }}">
+            </div>
+        @else
+            <div class="text-info" style="display: inline-block;">
+                <p class="thumbnail book-list-user-avatar">{{ $book->user->getFirstWordsFromName() }}</p>
+            </div>
+        @endif
+        <h2 style="display: inline-table; font-size: 22px; margin: 0;"><a style="color: inherit" href="{{ route('book.show', $book->id) }}">{{ $book->title }}</a></h2>
     </div>
     <div class="panel-body row">
         <div class="col-md-1">

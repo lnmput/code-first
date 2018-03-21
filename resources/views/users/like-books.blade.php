@@ -11,7 +11,7 @@
                         <h4>Ta喜欢的微册</h4>
                     </div>
                 </div>
-                @if($user->like_books->count())
+                @if($user->like_books_count)
                     @foreach($user->like_books as $item)
                         @php $book = $item->book;  @endphp
                         @include('common.book-item-list')

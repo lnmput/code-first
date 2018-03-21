@@ -40,9 +40,14 @@ class Books extends Controller
      */
     public function index()
     {
+
+
+        trace_sql();
+
+
         $tags = Tag::getForSelect();
 
-        $books = $this->bookRepository->hasChapters()->with(['tags'])->withCount(['chapters', 'likes'])->orderByDesc('id')->all(20);
+        $books = $this->bookRepository->hasChapters()->with(['tags', 'user'])->withCount(['chapters', 'likes'])->orderByDesc('id')->all(20);
 
         return view('books.index',  ['books' => $books, 'tags' => $tags]);
     }

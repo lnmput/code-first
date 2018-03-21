@@ -23,6 +23,40 @@ class UserRepository
         return $this->user->find($id);
     }
 
+
+
+    /**
+     * 关系预加载
+     *
+     * @param array $relations
+     * @return $this
+     */
+    public function with(array $relations)
+    {
+        $this->user = $this->user->with($relations);
+        return $this;
+    }
+
+    public function withCount(array $relation)
+    {
+        $this->user = $this->user->withCount($relation);
+        return $this;
+    }
+
+    public function orderByDesc($field)
+    {
+        $this->user = $this->user->orderByDesc($field);
+        return $this;
+    }
+
+
+    public function order($field, $sort = 'desc')
+    {
+        $this->user = $this->user->orderBy($field, $sort);
+        return $this;
+    }
+
+
     /**
      * 修改用户数据
      *

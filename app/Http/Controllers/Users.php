@@ -19,8 +19,6 @@ class Users extends Controller
 
     public function __construct(UserRepository $userRepository)
     {
-
-
         $this->middleware(function ($request, $next) {
 
             $this->user= Auth::user();
@@ -29,6 +27,7 @@ class Users extends Controller
         })->except(['index']);
 
         $this->request = request();
+
         $this->userRepository = $userRepository;
     }
 
@@ -40,7 +39,9 @@ class Users extends Controller
     public function index($id)
     {
 
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->with(['books', 'chapters'])->withCount(['books', 'chapters'])->find($id);
+
+       // dd($user);
 
         return view('users.index', ['user' => $user]);
     }
@@ -97,11 +98,12 @@ class Users extends Controller
 
     /**
      * 用户发表的微册列表
-     * 过滤下面文章数为 0 的微册
+     *
      */
     public function booksIndex($id)
     {
-        $user = $this->userRepository->find($id);
+        trace_sql();
+        $user = $this->userRepository->orderByDesc('id')->with(['books'])->withCount(['books', 'chapters'])->find($id);
 
         return view('users.books', ['user' => $user]);
     }
@@ -109,10 +111,13 @@ class Users extends Controller
 
     /**
      * 用户发表的文章列表
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function chapterIndex($id)
     {
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->orderByDesc('id')->with(['books'])->withCount(['books', 'chapters'])->find($id);
 
         return view('users.chapters', ['user' => $user]);
     }
@@ -120,26 +125,30 @@ class Users extends Controller
 
     /**
      * 喜欢的文章列表
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function likeChaptersIndex($id)
     {
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->orderByDesc('id')->with(['books'])->withCount(['books', 'chapters'])->find($id);
 
         return view('users.like-chapters', ['user' => $user]);
     }
 
 
-
     /**
      * 喜欢的微册列表
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function likeBooksIndex($id)
     {
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->orderByDesc('id')->with(['like_books'])->withCount(['books', 'chapters', 'like_books'])->find($id);
 
         return view('users.like-books', ['user' => $user]);
     }
-
 
 
     /**
@@ -149,7 +158,7 @@ class Users extends Controller
 
     public function buyBooksIndex($id)
     {
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->orderByDesc('id')->with(['books'])->withCount(['books', 'chapters'])->find($id);
 
         return view('users.buy-books', ['user' => $user]);
     }
@@ -160,7 +169,7 @@ class Users extends Controller
      */
     public function buyChaptersIndex($id)
     {
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->orderByDesc('id')->with(['books'])->withCount(['books', 'chapters'])->find($id);
 
         return view('users.buy-chapters', ['user' => $user]);
     }
@@ -182,22 +191,5 @@ class Users extends Controller
     {
 
     }
-
-    /**
-     * 点赞微册或者取消点赞
-     */
-    public function likeOrUnlikeBook()
-    {
-
-    }
-
-    /**
-     * 点赞文章或者取消点赞
-     */
-    public function likeOrUnlikeChapter()
-    {
-
-    }
-
 
 }
